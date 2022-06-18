@@ -13,18 +13,22 @@ var playerMoney = 10;
 
 // Create an array to store multiple enemy names
 var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
+console.log(enemyNames);
+console.log(enemyNames.length);
+console.log(enemyNames[0]);
+console.log(enemyNames[3]);
+
 var enemyHealth = 50;
 var enemyAttack = 12;
 
 /* Note: A JavaScript function is a block of code designed to perform a particular task. 
 The javascript method is an object property that has a function value. */
 
-
 //fight function
 var fight = function(enemyName) {
 
     // repeat and execute as long as the enemy-robot is alive
-    while(enemyHealth > 0) {
+    while(playerHealth > 0 && enemyHealth > 0) {
 
     // Give the player the choice to fight or skip the fight
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
@@ -57,6 +61,7 @@ var fight = function(enemyName) {
         // check player's health
         if (playerHealth <= 0) {
             window.alert(playerName + " has died!");
+            break;
         } else {
             window.alert(playerName + " still has " + playerHealth + " health left.");
         }
