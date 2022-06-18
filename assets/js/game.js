@@ -1,19 +1,27 @@
+// Game States
+// "WIN" - Player robot has defeated all enemy robots
+// * Fight all enemy robots
+// * Defeat each enemy robot
+// "LOSE" - Player robot's health is zero or less
+
+
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
+//You can also log multiple values at once like this:  console.log(playerName, playerAttack, playerHealth)
 
-//You can also log multiple values at once like this console.log(playerName, playerAttack, playerHealth)
-
-var enemyName = "Roberto";
+// Create an array to store multiple enemy names
+var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
 /* Note: A JavaScript function is a block of code designed to perform a particular task. 
 The javascript method is an object property that has a function value. */
 
+
 //fight function
-var fight = function() {
+var fight = function(enemyName) {
 
     // Alert players that they are starting the round.
     window.alert("Welcome to Robot Gladiators!");
@@ -25,7 +33,7 @@ var fight = function() {
 
      // if player chooses to fight, then fight
      if (promptFight === "fight" || promptFight === "FIGHT") {
-        // remove ememy's health by subtracting the amount set in the playerAttack variable
+        // remove enemy's health by subtracting the amount set in the playerAttack variable
         enemyHealth = enemyHealth - playerAttack;
         // Log a resulting message to the console so we know that it worked.
         console.log(
@@ -43,7 +51,7 @@ var fight = function() {
         playerHealth = playerHealth - enemyAttack;
         // Log a resulting message to the console so we know that it worked.
         console.log(
-            enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
+            enemyNames + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
         )
 
         // check player's health
@@ -75,5 +83,7 @@ var fight = function() {
      }
 }; // end of fight function
 
-// run the fight funtion to start the game
-fight ();
+// use for loop to call the fight within the loop
+for(var i = 0; i < enemyNames.length; i++) {
+    fight(enemyNames[i]);
+}
