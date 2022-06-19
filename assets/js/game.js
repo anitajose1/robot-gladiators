@@ -1,10 +1,3 @@
-// Game States
-// "WIN" - Player robot has defeated all enemy robots
-// * Fight all enemy robots
-// * Defeat each enemy robot
-// "LOSE" - Player robot's health is zero or less
-
-
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
@@ -20,9 +13,6 @@ console.log(enemyNames[3]);
 
 var enemyHealth = 50;
 var enemyAttack = 12;
-
-/* Note: A JavaScript function is a block of code designed to perform a particular task. 
-The javascript method is an object property that has a function value. */
 
 // fight function (now with parameter for enemy's name)
 var fight = function(enemyName) {
@@ -55,8 +45,10 @@ var fight = function(enemyName) {
       // check enemy's health
       if (enemyHealth <= 0) {
         window.alert(enemyName + " has died!");
+
         // award player money for winning
         playerMoney = playerMoney + 20;
+
         // leave while() loop since enemy is dead
         break;
       } else {
@@ -105,6 +97,17 @@ var fight = function(enemyName) {
             
             // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
             fight(pickedEnemyName);
+
+            //if we're not at the last enemy in the array
+            if (playerHealth > 0 && i < enemyNames.length - 1) {
+                // ask if player wants to use the store before next round
+                var storeConfirm = window.confirm("The fight is over, visit the store before the next round");
+
+                // if yes, take them to the store () function
+                if (storeConfirm) {
+                    shop();
+                }
+            }
         }
         // if player isn't alive, stop the game
         else {
@@ -137,6 +140,55 @@ var endGame = function() {
         window.alert("Thank you for playing Robot Gladiators! Come back soon!");
     }
 }
+
+var shop = function () {
+    // ask player what they like to do
+    var shopOptionPrompt = window.prompt(
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    );
+
+    // use switch to carry out action
+    switch (shopOptionPrompt) {
+        case "REFILL":
+        case "refill":
+            if (playerMoney >= 7) {
+                window.alert("Refilling player's health by 20 for 7 dollars.");
+                //increase health and decrease money
+                playerHealth = playerHealth + 20;
+                playerMoney = playerMoney - 7;
+            }
+            else {
+                window.alert("You don't have enough money!");
+            }
+            break;
+
+        case "UPGRADE":
+        case "upgrade":
+            if (playerMoney >= 7) {
+                window.alert("Upgrading player's attack by 6 for 7 dollars.");
+                //increase attack and decrease money
+                playerAttack = playerAttack + 6;
+                playerMoney = playerMoney - 7;
+            }
+            else {
+                window.alert("You don't have enough money!");
+            }
+            break;
+
+        case "LEAVE":
+        case "leave":
+            window.alert("Leaving the store.");
+            // do nothing, so function will end
+            break;
+
+        default:
+            window.alert("You did not pick a valid option. Try again.");
+
+            // call shop again to force player to pick a valid option
+            shop();
+            break;
+    }
+};
 
 // start the game when the page loads
 startGame();
